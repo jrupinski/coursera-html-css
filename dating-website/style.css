@@ -12,5 +12,8 @@ label {
 }
 label[for="gender"], label[for="contact"] {width: auto;}
 span {background: lightpink}
-label:hover { font-size: 40px }
+label:hover {
+    font-size: 40px;
+    transition: font 0.3s ease
+}
 textarea {width: 360px; height: 50px}
