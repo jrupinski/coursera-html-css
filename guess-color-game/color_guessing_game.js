@@ -7,16 +7,15 @@ colors.sort();
 // sort colors alphabetically
 finished = false;
 
-function start_game()
-{
-    target_index = Math.floor(Math.random() * colors.length);
-    // create a random number between 0 and number of colors
+function start_game() {
+    target_index = Math.floor(Math.random() * colors.length - 1);
+    // create a random number between 0 and number of colors - 1
+    // arrays index stars from 0, so it's last item's index is 1 number behind
     target = colors[target_index];
     // get name of random color
     alert("Picked color: " + target);
     // show which color was chosen
-    do
-    {
+    do {
         guess_input = prompt("I am thinking of one of these colors: \n\n" + colors + "\n\n Which one am I thinking about?");
         console.log("Your input: " + guess_input);
         // debug line
@@ -29,26 +28,35 @@ function start_game()
     } while (!finished);
 }
 
-function set_bg_color()
-{
+function set_bg_color() {
     myBody = document.getElementsByTagName("body")[0];
     myBody.style.background = target;
     // target is color chosen by the program
 }
 
-function check_color()
-{
+function check_color() {
     var guess_index = colors.indexOf(guess_input);
     // local variable for getting the index of guess/input color in the colors array
-    switch (true)
-    {
-        case !isNaN(guess_input):
-            alert("I don't recognize this color. \n\nPlease try again!")
+    console.log("guess index = " + guess_index);
+    // debbuging line
+
+    switch (true) {
+
+        case guess_input == "":
+            alert("Input is empty - please type in something!");
             break;
+
+        case !isNaN(guess_input):
+            alert("This is not a color - this is a number. \n\nPlease try again!");
+            break;
+
+        case guess_index < 0 || guess_index > colors.length - 1:
+        alert("I don't recognise this color. It's not on the list of my colors. \n\n Please try again!");
+        break;
 
         case guess_index == target_index:
             alert("You are correct! The color was " + target + "! \n\nNumber of guesses you made: " + guess_count);
-            finished=true;
+            finished = true;
             set_bg_color();
             break;
 
