@@ -9,11 +9,11 @@ finished = false;
 
 function start_game() {
     target_index = Math.floor(Math.random() * colors.length - 1);
-    console.log("index less than 0, restart...");
     // create a random number between 0 and number of colors - 1
     // arrays index stars from 0, so it's last item's index is 1 number behind
-    if (target_index<0)
-        start_game();
+    while (target_index<0)
+        console.log("index less than 0, restart...");
+        target_index = Math.floor(Math.random() * colors.length - 1);
     // if target_index<0 - start the game again until index is valid
 
     target = colors[target_index];
@@ -56,7 +56,7 @@ function check_color() {
             alert("This is not a color - this is a number. \n\nPlease try again!");
             break;
 
-        case guess_index == -1 || guess_index > colors.length - 1:
+        case guess_index == -1:
         alert("I don't recognise this color. It's not on the list of my colors. \n\n Please try again!");
         break;
 
